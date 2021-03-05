@@ -5,7 +5,7 @@ Source code for https://lukas.zrout.at/bdf
 A clientside webbrowser application
 
 # Want to run it locally?
-Just opening index.html sadly won't do the trick. Because of CORS, your initial request has to be http. Put it on a local webserver and it should work
+Just opening index.html sadly won't do the trick. Because of CORS, the Ajax-Requests have to be http. Put it on a local webserver and it should work
 
 
 # Changelog
