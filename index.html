@@ -1,0 +1,61 @@
+<!DOCTYPE html5>
+<html>
+    <head>
+        <title>BDF to SVG Converter</title>
+        <link href="./style/style.css" rel="stylesheet" type="text/css"/>
+        <link href="./style/fonts.css" rel="stylesheet" type="text/css"/>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="svgifyMin.js"></script>
+        <script src="main.js"></script>
+        
+
+        <meta name="author" content="Zrout Lukas">
+        <meta name="copyright" content="Zrout Lukas">
+        <meta name="description" content="Intel Quartus Prime .bdf to SVG Converter by Lukas Zrout">
+        <meta http-equiv="content-language" content="en">
+    </head>
+    <body>
+        <div id="header">
+                <a id="logoImgClickable" href="./index.html"><img alt="logo" id="logoImg" src="./media/logo.svg"/></a>
+            <div id="menue">
+                <a href="./index.html" class="menueEntry" id="entryStart">start</a>
+                <a href="./source.html" class="menueEntry" id="entrySource">source</a>
+                <a href="./about.html" class="menueEntry" id="entryAbout">about</a>
+            </div>
+        </div>
+        <div id="maincontent">
+            <div id="stage">
+                <div id="svgOutWrapper">
+                    <div id="frame"></div>
+                </div>
+                <div id="startUpload">
+                    <p id="startUploadHeadline">Intel Quartus Prime .bdf-file to svg converter</p>
+                    <p id="startUploadButton">Upload .bdf file</p>
+                </div>
+            </div>
+            <div id="options">
+                <div id="settings">
+                    <p id="settingsHeadline">Settings</p>
+                    <p id="settingsSchemeHeadline">Color Scheme</p>
+                    <form id="SchemeForm">
+                        <select id="scheme" name="scheme">
+                            <option value="stylesQuartus">Quartus Original</option>
+                            <option value="stylesGreen">Green</option>
+                            <option value="stylesBnW">B&W</option>
+                        </select> 
+                    </form>
+                    <p id="recompute">Apply Changes</p>
+                </div>
+                <p id="innerConsole"></p>
+                <div id="downloadOptions">
+                    <a id="svgOut" class="downloadButtons">Download</a>
+                    <p id="svgAnother" class="downloadButtons">Convert Another</p>
+                </div>
+            </div>
+        </div>
+        <form id="uploadForm" >
+            <input id="uploadInput" type="file" onchange="uploadFile();" >
+        </form>
+    </body>
+</html>

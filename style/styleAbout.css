@@ -1,0 +1,73 @@
+body{
+    margin:0px;
+    padding:0px;
+    background-color: white;
+    font-family: Roboto;
+}
+#header{
+    height:12vh;
+    width:100vw;
+    margin:0;
+    padding:0;
+    box-shadow: 0 0 1px black;
+}
+#logoImg{
+    height:100%;
+    margin-left:10px;
+    cursor: pointer;
+}
+#logoImgClickable{
+    display:block;
+    height:100%;
+}
+.menueEntry{
+    text-decoration: none;
+    color:black;
+    display:block;
+    text-transform:uppercase;
+    font-family: RobotoThin;
+    display:inline-block;
+    margin-right: 2vw;
+    transition: 200ms;
+    border-radius: 5px;
+    padding:5px;
+    cursor :pointer;
+}
+.menueEntry:hover{
+    transform: scale(1.05);
+}
+#maincontent{
+    height:88%;
+    width:100%;
+}
+#mainHeading{
+    display:inline-block;
+    font-size: 50px;
+    width:30%;
+    margin:20px 10px 20px 20px;
+    box-shadow: 1px 0px black;
+}
+#mainDescription{
+    font-size: 30px;
+    width: 60%;
+    float:right;
+    font-family: RobotoLight;
+}
+#contactHeading{
+    margin:50px 10px 5px 40px;
+    font-size:40px;
+}
+.contactDescription{
+    font-family: RobotoLight;
+    margin:0px 10px 0px 40px;
+    font-size:30px;
+}
+#webLink{
+    text-decoration: none;
+    color:black;
+}
+#header{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}

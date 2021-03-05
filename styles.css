@@ -1,0 +1,52 @@
+<style type="text/css">
+.refRect{
+    fill:none;
+    stroke-width:1;
+    stroke:#11807F;
+    stroke-dasharray:5,5;
+}
+.arc{
+    fill:none;
+    stroke-width:1;
+    stroke:#11807F;
+}
+.junction{
+    fill:#11807F;
+    stroke-width:1;
+    stroke:#11807F;
+}
+.rectangle{
+    fill:none;
+    stroke-width:1;
+    stroke:#11807F;
+}
+.circle{
+    fill:none;
+    stroke-width:1;
+    stroke:#11807F;
+}
+.line{
+    fill:none;
+    stroke-width:1;
+    stroke:#11807F;
+}
+.text{
+    font-size:10px;
+    font-family: helvetica;
+}
+</style>
+<metadata>
+      <rdf:RDF
+           xmlns:rdf = "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:rdfs = "http://www.w3.org/2000/01/rdf-schema#"
+           xmlns:dc = "http://purl.org/dc/elements/1.1/" >
+        <rdf:Description about="https://lukas.zrout.at"
+             dc:title="BDF to SVG Converter Ouput"
+             dc:description="Intel Quartus Prime .bdf File to SVG Converter Output"
+             dc:publisher="Zrout Lukas HTBL Hollabrunn 2020"
+             dc:date="2020-27-12"
+             dc:format="image/svg+xml"
+             dc:language="en" >
+        </rdf:Description>
+      </rdf:RDF>
+    </metadata>

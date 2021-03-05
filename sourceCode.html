@@ -1,0 +1,767 @@
+<!-- HTML generated using hilite.me -->
+<body style="margin:0;border:0; overflow:scroll;">
+<table><tr><td><pre style="margin: 0; line-height: 125%;position:relative;top:-8px;border:0;width: 100%;">    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+   10
+   11
+   12
+   13
+   14
+   15
+   16
+   17
+   18
+   19
+   20
+   21
+   22
+   23
+   24
+   25
+   26
+   27
+   28
+   29
+   30
+   31
+   32
+   33
+   34
+   35
+   36
+   37
+   38
+   39
+   40
+   41
+   42
+   43
+   44
+   45
+   46
+   47
+   48
+   49
+   50
+   51
+   52
+   53
+   54
+   55
+   56
+   57
+   58
+   59
+   60
+   61
+   62
+   63
+   64
+   65
+   66
+   67
+   68
+   69
+   70
+   71
+   72
+   73
+   74
+   75
+   76
+   77
+   78
+   79
+   80
+   81
+   82
+   83
+   84
+   85
+   86
+   87
+   88
+   89
+   90
+   91
+   92
+   93
+   94
+   95
+   96
+   97
+   98
+   99
+  100
+  101
+  102
+  103
+  104
+  105
+  106
+  107
+  108
+  109
+  110
+  111
+  112
+  113
+  114
+  115
+  116
+  117
+  118
+  119
+  120
+  121
+  122
+  123
+  124
+  125
+  126
+  127
+  128
+  129
+  130
+  131
+  132
+  133
+  134
+  135
+  136
+  137
+  138
+  139
+  140
+  141
+  142
+  143
+  144
+  145
+  146
+  147
+  148
+  149
+  150
+  151
+  152
+  153
+  154
+  155
+  156
+  157
+  158
+  159
+  160
+  161
+  162
+  163
+  164
+  165
+  166
+  167
+  168
+  169
+  170
+  171
+  172
+  173
+  174
+  175
+  176
+  177
+  178
+  179
+  180
+  181
+  182
+  183
+  184
+  185
+  186
+  187
+  188
+  189
+  190
+  191
+  192
+  193
+  194
+  195
+  196
+  197
+  198
+  199
+  200
+  201
+  202
+  203
+  204
+  205
+  206
+  207
+  208
+  209
+  210
+  211
+  212
+  213
+  214
+  215
+  216
+  217
+  218
+  219
+  220
+  221
+  222
+  223
+  224
+  225
+  226
+  227
+  228
+  229
+  230
+  231
+  232
+  233
+  234
+  235
+  236
+  237
+  238
+  239
+  240
+  241
+  242
+  243
+  244
+  245
+  246
+  247
+  248
+  249
+  250
+  251
+  252
+  253
+  254
+  255
+  256
+  257
+  258
+  259
+  260
+  261
+  262
+  263
+  264
+  265
+  266
+  267
+  268
+  269
+  270
+  271
+  272
+  273
+  274
+  275
+  276
+  277
+  278
+  279
+  280
+  281
+  282
+  283
+  284
+  285
+  286
+  287
+  288
+  289
+  290
+  291
+  292
+  293
+  294
+  295
+  296
+  297
+  298
+  299
+  300
+  301
+  302
+  303
+  304
+  305
+  306
+  307
+  308
+  309
+  310
+  311
+  312
+  313
+  314
+  315
+  316
+  317
+  318
+  319
+  320
+  321
+  322
+  323
+  324
+  325
+  326
+  327
+  328
+  329
+  330
+  331
+  332
+  333
+  334
+  335
+  336
+  337
+  338
+  339
+  340
+  341
+  342
+  343
+  344
+  345
+  346
+  347
+  348
+  349
+  350
+  351
+  352
+  353
+  354
+  355
+  356
+  357
+  358
+  359
+  360
+  361
+  362
+  363
+  364
+  365
+  366
+  367
+  368
+  369
+  370
+  371
+  372
+  373
+  374
+  375
+  376
+  377
+  378
+  379
+  380
+  381
+  382</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #aaaaaa; font-style: italic">  //Global Variables:</span>
+  <span style="color: #aaaaaa; font-style: italic">//(I know, bad practice, especially in JS, but I genuinely believe this is the best way for the application)</span>
+  <span style="color: #0000aa">let</span> smallestXref,smallestYref,biggestXref,biggestYref;
+  <span style="color: #aaaaaa; font-style: italic">//the biggest and smallest X and Y coordinates to determine</span>
+  
+  <span style="color: #0000aa">function</span> svgify(inputBDF,prefix,styles,ref=[<span style="color: #009999">0</span>,<span style="color: #009999">0</span>]){
+      <span style="color: #aaaaaa; font-style: italic">//takes an input BDF as a string and x and y reference, which will be added</span>
+      <span style="color: #aaaaaa; font-style: italic">//to every object. returns the svg code (with style classes and prefix for the file) as a string</span>
+  
+      <span style="color: #0000aa">if</span>(<span style="color: #0000aa">typeof</span> svgify.run==<span style="color: #aa5500">&quot;undefined&quot;</span>){
+          svgify.run=<span style="color: #009999">1</span>; <span style="color: #aaaaaa; font-style: italic">//if never initialized, initialize!</span>
+      }<span style="color: #0000aa">else</span> svgify.run++; <span style="color: #aaaaaa; font-style: italic">//counts the recursions</span>
+  
+      smallestXref=<span style="color: #009999">1e5</span>; <span style="color: #aaaaaa; font-style: italic">//smalles x and y coordinate to determine reset</span>
+      smallestYref=<span style="color: #009999">1e5</span>;
+      biggestXref=<span style="color: #009999">0</span>;  <span style="color: #aaaaaa; font-style: italic">//biggest x and y coordinate to determine reset</span>
+      biggestYref=<span style="color: #009999">0</span>;
+      <span style="color: #0000aa">let</span> output=<span style="color: #aa5500">&quot;&quot;</span>;
+  
+      <span style="color: #aaaaaa; font-style: italic">//start the conversion</span>
+      output=extractionSVG(inputBDF,ref)[<span style="color: #009999">0</span>];
+      <span style="color: #0000aa">if</span>((smallestXref!=<span style="color: #009999">10</span>)&amp;&amp;(smallestYref!=<span style="color: #009999">10</span>)){
+          <span style="color: #aaaaaa; font-style: italic">//if the smallest coordinates of any main rect or object is or not 10</span>
+          <span style="color: #aaaaaa; font-style: italic">//then call recursively and set the super reference so that coordinate origin is 0 +10offset</span>
+          <span style="color: #0000aa">if</span>(svgify.run&gt;<span style="color: #009999">2</span>){
+              innerConsole(<span style="color: #aa5500">&quot;Error! Too much recursion!&quot;</span>);
+              innerConsole(<span style="color: #aa5500">&quot;bdf File might be currupted?&quot;</span>);
+              svgify.run=<span style="color: #009999">1</span>;
+              <span style="color: #0000aa">return</span> <span style="color: #009999">0</span>;
+          }
+          innerConsole(<span style="color: #aa5500">&quot;Starting Conversion...&quot;</span>);
+          <span style="color: #0000aa">return</span> svgify(inputBDF,prefix,styles,[smallestXref*(-<span style="color: #009999">1</span>)+ref[<span style="color: #009999">0</span>]+<span style="color: #009999">10</span>,smallestYref*(-<span style="color: #009999">1</span>)+ref[<span style="color: #009999">1</span>]+<span style="color: #009999">10</span>]);
+      }
+      <span style="color: #0000aa">else</span>{
+          innerConsole(<span style="color: #aa5500">&quot;Reference ok!&quot;</span>);
+          svgify.run=<span style="color: #009999">1</span>;
+          <span style="color: #aaaaaa; font-style: italic">//width and height are biggest x and y coordinates +10offset</span>
+          <span style="color: #aaaaaa; font-style: italic">//add the styles and the computed string.</span>
+          <span style="color: #0000aa">let</span> xmlns=<span style="color: #aa5500">&quot;xmlns=\&quot;http://www.w3.org/2000/svg\&quot;&quot;</span>;
+          biggestXref+=<span style="color: #009999">10</span>;
+          biggestYref+=<span style="color: #009999">10</span>;
+          output=(<span style="color: #aa5500">&quot;&lt;svg width=\&quot;&quot;</span>+(biggestXref)+<span style="color: #aa5500">&quot;\&quot; height=\&quot;&quot;</span>+(biggestYref)+<span style="color: #aa5500">&quot;\&quot; &quot;</span>+xmlns+<span style="color: #aa5500">&quot;&gt;&quot;</span>+styles+output+<span style="color: #aa5500">&quot;&lt;\/svg&gt;&quot;</span>);
+          innerConsole(<span style="color: #aa5500">&quot;Done!&quot;</span>);
+          <span style="color: #aaaaaa; font-style: italic">//calculate File size and output</span>
+          <span style="color: #0000aa">let</span> fileSize=<span style="color: #00aaaa">Math</span>.floor(output.length/<span style="color: #009999">1024</span>*<span style="color: #009999">10</span>)/<span style="color: #009999">10</span>;
+          innerConsole(<span style="color: #aa5500">&quot;File with &quot;</span>+(fileSize)+<span style="color: #aa5500">&quot;kB generated.&quot;</span>);
+          <span style="color: #0000aa">return</span> output;
+      }
+  }
+  <span style="color: #0000aa">function</span> extractionSVG(input,ref,usedNrREF=[]){
+      <span style="color: #0000aa">let</span> output=<span style="color: #aa5500">&quot;&quot;</span>;
+      <span style="color: #0000aa">let</span> length=input.length;
+      <span style="color: #aaaaaa; font-style: italic">//some text elements are double stated within a &quot;scope&quot;. </span>
+      <span style="color: #0000aa">let</span> usedTextElements=[];
+      <span style="color: #aaaaaa; font-style: italic">//initialize and set amount of every type to 0;</span>
+      <span style="color: #0000aa">let</span> usedNr=[];
+      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> m=<span style="color: #009999">0</span>;m&lt;<span style="color: #009999">10</span>;m++)usedNr.push(<span style="color: #009999">0</span>);
+      <span style="color: #0000aa">if</span>(usedNrREF.length!=<span style="color: #009999">0</span>)usedNr=usedNrREF;
+      
+      <span style="color: #0000aa">let</span> types=[<span style="color: #aa5500">&quot;/*&quot;</span>,<span style="color: #aa5500">&quot;symbol&quot;</span>,<span style="color: #aa5500">&quot;pin&quot;</span>,<span style="color: #aa5500">&quot;text &quot;</span>,<span style="color: #aa5500">&quot;line &quot;</span>,<span style="color: #aa5500">&quot;connector&quot;</span>,<span style="color: #aa5500">&quot;circle &quot;</span>,<span style="color: #aa5500">&quot;junction &quot;</span>,<span style="color: #aa5500">&quot;arc &quot;</span>,<span style="color: #aa5500">&quot;rectangle &quot;</span>];
+  
+      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> k=<span style="color: #009999">0</span>;k&lt;length;k++){<span style="color: #aaaaaa; font-style: italic">//go through every letter</span>
+          <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> m=<span style="color: #009999">0</span>;m&lt;<span style="color: #009999">10</span>;m++){<span style="color: #aaaaaa; font-style: italic">//look for every known type</span>
+              <span style="color: #0000aa">if</span>(input.slice(k,k+types[m].length)===types[m]){ <span style="color: #aaaaaa; font-style: italic">//if the type looked for is the one at the current letter</span>
+                  <span style="color: #0000aa">if</span>(m==<span style="color: #009999">0</span>){<span style="color: #aaaaaa; font-style: italic">//if the found one is of type 0 (/*)</span>
+                      <span style="color: #0000aa">for</span>(k;(k&lt;input.length)&amp;&amp;(input.slice(k,k+<span style="color: #009999">2</span>)!=<span style="color: #aa5500">&quot;*/&quot;</span>);k++);<span style="color: #aaaaaa; font-style: italic">//skip comment until */ reached</span>
+                  }
+                  <span style="color: #0000aa">else</span> <span style="color: #0000aa">if</span>((m==<span style="color: #009999">1</span>)||(m==<span style="color: #009999">2</span>)){ <span style="color: #aaaaaa; font-style: italic">//symbol or pin</span>
+                      <span style="color: #0000aa">let</span> computedPart=findAndReturn(input,types[m],usedNr[m]);<span style="color: #aaaaaa; font-style: italic">//get the whole symbol/pin</span>
+                      <span style="color: #0000aa">let</span> values=computeSymbolPin(computedPart,ref); <span style="color: #aaaaaa; font-style: italic">//get the SVG of the elements within</span>
+                      output+=values[<span style="color: #009999">0</span>]; <span style="color: #aaaaaa; font-style: italic">//plain svg output</span>
+                      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> i=<span style="color: #009999">0</span>;i&lt;<span style="color: #009999">9</span>;i++){
+                          usedNr[i]+=values[<span style="color: #009999">1</span>][i]; <span style="color: #aaaaaa; font-style: italic">//usedNr of every element found within symbol/pin</span>
+                      }
+                      usedNr[m]++; <span style="color: #aaaaaa; font-style: italic">//usedNr of symbol/pin itself iterated</span>
+                      k+=computedPart.length+types[m].length+<span style="color: #009999">2</span>; <span style="color: #aaaaaa; font-style: italic">//rest of the symbol/pin is skipped</span>
+                      m=<span style="color: #009999">0</span>; <span style="color: #aaaaaa; font-style: italic">//start looking for every type again</span>
+                  }
+                  <span style="color: #0000aa">else</span>{ <span style="color: #aaaaaa; font-style: italic">//everything else (3...9) same concept as symbol/pin above</span>
+                      <span style="color: #0000aa">let</span> computedPart=findAndReturn(input,types[m],usedNr[m]);
+                      <span style="color: #0000aa">let</span> value=computeElement(types[m],computedPart,ref,usedTextElements);
+                      output+=value[<span style="color: #009999">0</span>]; <span style="color: #aaaaaa; font-style: italic">//plain svg output</span>
+                      usedTextElements=value[<span style="color: #009999">1</span>];<span style="color: #aaaaaa; font-style: italic">//usedTextElemens is only used within this scope (this call) (not like usedNr!!)</span>
+                      usedNr[m]++;
+                      k+=computedPart.length+types[m].length+<span style="color: #009999">2</span>;
+                  }
+              }
+          }    
+      }
+      <span style="color: #0000aa">return</span> [output,usedNr];
+      <span style="color: #aaaaaa; font-style: italic">//also returns usedNr, for the symbol/pin recursion. the</span>
+      <span style="color: #aaaaaa; font-style: italic">//amount of any element in the main call has to be the absolute one, meaning the amounts</span>
+      <span style="color: #aaaaaa; font-style: italic">//within symbols/pins have to be added! Otherwise findAndReturn() wouldn&#39;t return</span>
+      <span style="color: #aaaaaa; font-style: italic">//correct values.</span>
+  }
+  <span style="color: #0000aa">function</span> computeSymbolPin(input,ref){
+      <span style="color: #0000aa">let</span> output=<span style="color: #aa5500">&quot;&quot;</span>;
+      <span style="color: #aaaaaa; font-style: italic">//get the reference rect (the very first one, 0) around the part</span>
+      <span style="color: #0000aa">let</span> mainRect=findAndReturn(input,<span style="color: #aa5500">&quot;rect&quot;</span>,<span style="color: #009999">0</span>);
+      <span style="color: #aaaaaa; font-style: italic">//extract the int values</span>
+      <span style="color: #0000aa">let</span> referenceRect=getReferencePoints(mainRect);
+      <span style="color: #aaaaaa; font-style: italic">//add the offsets</span>
+      referenceRect[<span style="color: #009999">0</span>]+=ref[<span style="color: #009999">0</span>];
+      referenceRect[<span style="color: #009999">1</span>]+=ref[<span style="color: #009999">1</span>];
+      referenceRect[<span style="color: #009999">2</span>]+=ref[<span style="color: #009999">0</span>];
+      referenceRect[<span style="color: #009999">3</span>]+=ref[<span style="color: #009999">1</span>];
+  
+      <span style="color: #aaaaaa; font-style: italic">//draw the main rect of the symbol/pin</span>
+      output=rectangleToSVG(<span style="color: #aa5500">&quot;&quot;</span>,referenceRect,<span style="color: #aa5500">&quot;refRect&quot;</span>);
+      <span style="color: #aaaaaa; font-style: italic">//draw the rest of the elements of the symbol/pin, with the other reference in mind</span>
+      <span style="color: #0000aa">let</span> values=extractionSVG(input,referenceRect,[]);
+      output+=values[<span style="color: #009999">0</span>];
+      <span style="color: #0000aa">return</span> [output,values[<span style="color: #009999">1</span>]];
+  }
+  
+  <span style="color: #0000aa">function</span> computeElement(type,input,ref,usedTextElements){
+      <span style="color: #0000aa">let</span> output=<span style="color: #aa5500">&quot;&quot;</span>;
+      <span style="color: #0000aa">switch</span>(type){
+          <span style="color: #0000aa">case</span> <span style="color: #aa5500">&quot;line &quot;</span>:
+          <span style="color: #0000aa">case</span> <span style="color: #aa5500">&quot;connector&quot;</span>:
+              output=lineToSVG(input,ref);
+              <span style="color: #0000aa">break</span>;
+          <span style="color: #0000aa">case</span> <span style="color: #aa5500">&quot;circle &quot;</span>:
+              output=circleToSVG(input,ref);
+              <span style="color: #0000aa">break</span>;
+          <span style="color: #0000aa">case</span> <span style="color: #aa5500">&quot;junction &quot;</span>:
+              output=junctionToSVG(input,ref);
+              <span style="color: #0000aa">break</span>;
+          <span style="color: #0000aa">case</span> <span style="color: #aa5500">&quot;arc &quot;</span>:
+              output=arcToSVG(input,ref);
+              <span style="color: #0000aa">break</span>;
+          <span style="color: #0000aa">case</span> <span style="color: #aa5500">&quot;rectangle &quot;</span>:
+              output=rectangleToSVG(input,ref);
+              <span style="color: #0000aa">break</span>;
+          <span style="color: #0000aa">case</span> <span style="color: #aa5500">&quot;text &quot;</span>:
+              <span style="color: #0000aa">if</span>(!input.includes(<span style="color: #aa5500">&quot;invisible&quot;</span>)){<span style="color: #aaaaaa; font-style: italic">//if the bdf text element has the invisible property, skip</span>
+                  <span style="color: #0000aa">let</span> x,y;
+                  <span style="color: #0000aa">let</span> actualText=getActualText(input); <span style="color: #aaaaaa; font-style: italic">//get the actual Text being displayed</span>
+                  <span style="color: #aaaaaa; font-style: italic">//if the text got already computed within this scope (this extractionSVG call)</span>
+                  <span style="color: #0000aa">if</span>(!usedTextElements.includes(actualText)){ 
+                      <span style="color: #0000aa">let</span> dimensionsRect=findAndReturn(input,<span style="color: #aa5500">&quot;rect&quot;</span>); <span style="color: #aaaaaa; font-style: italic">//get the reference rect strig</span>
+                      <span style="color: #aaaaaa; font-style: italic">//retrieve the int values of the reference rect</span>
+                      x=extractNum(dimensionsRect,<span style="color: #009999">0</span>)+ref[<span style="color: #009999">0</span>]; 
+                      <span style="color: #aaaaaa; font-style: italic">// ---,,--- 10 (font size) added (SVG takes the lower Y coordinate, whereas bdf the upper)</span>
+                      y=extractNum(dimensionsRect,<span style="color: #009999">1</span>)+ref[<span style="color: #009999">1</span>]+<span style="color: #009999">10</span>;
+                      output+=textToSVG(x,y,actualText,<span style="color: #aa5500">&quot;text&quot;</span>);
+                      usedTextElements.push(actualText);
+                  }
+              }
+              <span style="color: #0000aa">break</span>;
+      }
+      <span style="color: #0000aa">return</span> [output,usedTextElements];
+  }
+  
+  <span style="color: #0000aa">function</span> getActualText(input){
+      <span style="color: #aaaaaa; font-style: italic">//gets the actual text in a text element</span>
+      <span style="color: #0000aa">let</span> actualText=<span style="color: #aa5500">&quot;&quot;</span>;
+      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> k=<span style="color: #009999">1</span>;(k&lt;input.length)&amp;&amp;(input[k]!==<span style="color: #aa5500">&quot;\&quot;&quot;</span>);k++){
+          <span style="color: #aaaaaa; font-style: italic">//start at 2nd position and stop when a &quot; is reached.</span>
+          actualText+=input[k]; <span style="color: #aaaaaa; font-style: italic">//add this char to output string</span>
+      }
+      <span style="color: #0000aa">return</span> actualText;
+  }
+  <span style="color: #0000aa">function</span> getReferencePoints(input){
+      <span style="color: #aaaaaa; font-style: italic">//receives the string of the main rect</span>
+      <span style="color: #aaaaaa; font-style: italic">//returns first 2 numbers of the main rect as an Array -&gt;reference points</span>
+      <span style="color: #0000aa">let</span> out=[];
+      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> k=<span style="color: #009999">0</span>;k&lt;<span style="color: #009999">4</span>;k++){
+          out.push(extractNum(input,k));
+      }
+      <span style="color: #0000aa">return</span> out;
+  }
+  
+  <span style="color: #0000aa">function</span> findAndReturn(symbolString,keyword,occurenceNr=<span style="color: #009999">0</span>){ 
+      <span style="color: #aaaaaa; font-style: italic">//searching for a drawing sector(text, line, rect, etc.) in symbolString and returning whats within bracets</span>
+      <span style="color: #0000aa">let</span> output=<span style="color: #aa5500">&quot;&quot;</span>;
+      <span style="color: #0000aa">let</span> foundOccurence=<span style="color: #009999">0</span>;
+      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> k=<span style="color: #009999">0</span>;k&lt;symbolString.length-keyword.length-<span style="color: #009999">1</span>;k++){
+          <span style="color: #aaaaaa; font-style: italic">//go through every letter</span>
+          <span style="color: #0000aa">if</span>(symbolString.slice(k,k+keyword.length)===keyword){
+              <span style="color: #aaaaaa; font-style: italic">//if the current letter + the next few is the word =&gt;keyword found</span>
+              <span style="color: #0000aa">let</span> bracets=<span style="color: #009999">0</span>;
+              <span style="color: #0000aa">if</span>(symbolString[k-<span style="color: #009999">1</span>]===<span style="color: #aa5500">&#39;(&#39;</span>){
+                  <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> m=k-<span style="color: #009999">1</span>;m&lt;symbolString.length;m++){
+                      <span style="color: #aaaaaa; font-style: italic">//create output string until all bracets closed</span>
+                      output+=symbolString[m];
+                      <span style="color: #0000aa">if</span>(symbolString[m]===<span style="color: #aa5500">&#39;(&#39;</span>)bracets++;
+                      <span style="color: #0000aa">else</span> <span style="color: #0000aa">if</span>(symbolString[m]===<span style="color: #aa5500">&#39;)&#39;</span>)bracets--;
+                      <span style="color: #aaaaaa; font-style: italic">//if all bracets closed (meaning bracets=0, return and exit</span>
+                      <span style="color: #0000aa">if</span>((bracets===<span style="color: #009999">0</span>)){
+                          <span style="color: #0000aa">if</span>(foundOccurence===occurenceNr){
+                              <span style="color: #aaaaaa; font-style: italic">//if the desired number of occurences matches found ones, remove letters, return and exit</span>
+                              output=output.substring(<span style="color: #009999">1</span>+keyword.length,output.length-<span style="color: #009999">1</span>); <span style="color: #aaaaaa; font-style: italic">//remove first and last letter</span>
+                              <span style="color: #0000aa">return</span> output; 
+                          }
+                          <span style="color: #0000aa">else</span>{
+                              <span style="color: #aaaaaa; font-style: italic">//else, reset output and search for the next one</span>
+                              output=<span style="color: #aa5500">&quot;&quot;</span>; 
+                              m=symbolString.length;
+                              foundOccurence++; 
+                          }
+                      }
+                  }
+              }
+              
+          }
+      }
+      <span style="color: #0000aa">return</span> <span style="color: #aa5500">&quot;NULL&quot;</span>;
+  }
+  
+  <span style="color: #0000aa">function</span> extractNum(input,nr){
+  <span style="color: #aaaaaa; font-style: italic">//gets an input string extracts a number with its sign and returns it as an int.</span>
+      <span style="color: #0000aa">let</span> mult=<span style="color: #009999">0</span>;
+      <span style="color: #0000aa">let</span> amount=<span style="color: #009999">0</span>;
+      <span style="color: #0000aa">let</span> out=<span style="color: #aa5500">&quot;&quot;</span>;
+      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> k=<span style="color: #009999">0</span>;k&lt;input.length;k++){
+          <span style="color: #aaaaaa; font-style: italic">//search every char in given string</span>
+          <span style="color: #0000aa">if</span>((input[k]&gt;=<span style="color: #aa5500">&#39;0&#39;</span>)&amp;&amp;(input[k]&lt;=<span style="color: #aa5500">&#39;9&#39;</span>)){
+              <span style="color: #aaaaaa; font-style: italic">//begining of a number was found</span>
+              <span style="color: #aaaaaa; font-style: italic">//if the char before was a &#39;-&#39; </span>
+              <span style="color: #0000aa">if</span>((k&gt;<span style="color: #009999">0</span>)&amp;&amp;(input[k-<span style="color: #009999">1</span>]===<span style="color: #aa5500">&#39;-&#39;</span>))mult=-<span style="color: #009999">1</span>;
+              <span style="color: #0000aa">else</span> mult=<span style="color: #009999">1</span>;
+              
+              <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> m=k;m&lt;input.length;m++){
+                  <span style="color: #aaaaaa; font-style: italic">//keep on going through the number</span>
+                  <span style="color: #0000aa">if</span>((input[k]&gt;=<span style="color: #aa5500">&#39;0&#39;</span>)&amp;&amp;(input[k]&lt;=<span style="color: #aa5500">&#39;9&#39;</span>)){
+                      <span style="color: #aaaaaa; font-style: italic">//if it&#39;s still a number, add it to the out string</span>
+                      out+=input[k];
+                      k++;
+                  }
+                  <span style="color: #0000aa">else</span>{
+                      <span style="color: #aaaaaa; font-style: italic">//out string done. end loop</span>
+                      m=input.length;
+                  }
+              }
+              <span style="color: #0000aa">if</span>(amount===nr){
+                  <span style="color: #aaaaaa; font-style: italic">//if the position of the number matches with the requested</span>
+                  <span style="color: #aaaaaa; font-style: italic">//parse the out string to an int and multiply with its sign</span>
+                  k=input.length;
+              }
+              <span style="color: #0000aa">else</span> out=<span style="color: #aa5500">&quot;&quot;</span>;
+              amount++;
+          }
+      }
+      <span style="color: #0000aa">return</span> <span style="color: #00aaaa">parseInt</span>(out.match(<span style="color: #009999">/\d+/g</span>)[<span style="color: #009999">0</span>])*mult;
+  }
+  
+  <span style="color: #0000aa">function</span> determineSBCoordinates(xCoordinates=[],yCoordinates=[])
+  {
+      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> x of xCoordinates){
+          <span style="color: #0000aa">if</span>(x&lt;smallestXref) smallestXref=x;
+          <span style="color: #0000aa">if</span>(x&gt;biggestXref) biggestXref=x;    <span style="color: #aaaaaa; font-style: italic">//no &quot;else if&quot; here on purpose</span>
+      }
+      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> y of yCoordinates){
+          <span style="color: #0000aa">if</span>(y&lt;smallestYref) smallestYref=y;
+          <span style="color: #0000aa">if</span>(y&gt;biggestYref) biggestYref=y;
+      }
+      <span style="color: #0000aa">return</span>;
+  }
+  
+  <span style="color: #0000aa">function</span> textToSVG(x,y,rawtext,style=<span style="color: #aa5500">&quot;&quot;</span>){
+      determineSBCoordinates([x],[y]);
+      <span style="color: #0000aa">return</span> <span style="color: #aa5500">&quot;&lt;text x=\&quot;&quot;</span>+x+
+      <span style="color: #aa5500">&quot;\&quot; y=\&quot;&quot;</span>+y+
+      <span style="color: #aa5500">&quot;\&quot; class=\&quot;&quot;</span>+style+
+      <span style="color: #aa5500">&quot;\&quot;&gt;&quot;</span>+rawtext+<span style="color: #aa5500">&quot;&lt;\/text&gt;&quot;</span>;
+  }
+  <span style="color: #0000aa">function</span> lineToSVG(input,ref){
+      <span style="color: #0000aa">let</span> x1=ref[<span style="color: #009999">0</span>]+extractNum(input,<span style="color: #009999">0</span>);
+      <span style="color: #0000aa">let</span> y1=ref[<span style="color: #009999">1</span>]+extractNum(input,<span style="color: #009999">1</span>);
+      <span style="color: #0000aa">let</span> x2=ref[<span style="color: #009999">0</span>]+extractNum(input,<span style="color: #009999">2</span>);
+      <span style="color: #0000aa">let</span> y2=ref[<span style="color: #009999">1</span>]+extractNum(input,<span style="color: #009999">3</span>)
+      determineSBCoordinates([x1,x2],[y1,y2]);
+      <span style="color: #0000aa">return</span> <span style="color: #aa5500">&quot;&lt;line x1=\&quot;&quot;</span>+x1+
+      <span style="color: #aa5500">&quot;\&quot; y1=\&quot;&quot;</span>+y1+
+      <span style="color: #aa5500">&quot;\&quot; x2=\&quot;&quot;</span>+x2+
+      <span style="color: #aa5500">&quot;\&quot; y2=\&quot;&quot;</span>+y2+
+      <span style="color: #aa5500">&quot;\&quot; class=\&quot;line\&quot;/&gt;&quot;</span>;
+  }
+  <span style="color: #0000aa">function</span> circleToSVG(input,ref){
+      <span style="color: #0000aa">let</span> x1=ref[<span style="color: #009999">0</span>]+extractNum(input,<span style="color: #009999">0</span>);
+      <span style="color: #0000aa">let</span> y1=ref[<span style="color: #009999">1</span>]+extractNum(input,<span style="color: #009999">1</span>);
+      <span style="color: #0000aa">let</span> x2=ref[<span style="color: #009999">0</span>]+extractNum(input,<span style="color: #009999">2</span>);
+      <span style="color: #0000aa">let</span> y2=ref[<span style="color: #009999">1</span>]+extractNum(input,<span style="color: #009999">3</span>);
+      <span style="color: #0000aa">let</span> cx=x1+(x2-x1)/<span style="color: #009999">2</span>;<span style="color: #aaaaaa; font-style: italic">//center points</span>
+      <span style="color: #0000aa">let</span> cy=y1+(y2-y1)/<span style="color: #009999">2</span>;
+      <span style="color: #0000aa">let</span> rx1=(x2-x1)/<span style="color: #009999">2</span>; <span style="color: #aaaaaa; font-style: italic">//radius</span>
+      <span style="color: #0000aa">let</span> ry1=(y2-y1)/<span style="color: #009999">2</span>;
+      determineSBCoordinates([x1,x2],[y1,y2]);
+      <span style="color: #0000aa">return</span> <span style="color: #aa5500">&quot;&lt;ellipse cx=\&quot;&quot;</span>+cx+
+      <span style="color: #aa5500">&quot;\&quot; cy=\&quot;&quot;</span>+cy+
+      <span style="color: #aa5500">&quot;\&quot; rx=\&quot;&quot;</span>+rx1+
+      <span style="color: #aa5500">&quot;\&quot; ry=\&quot;&quot;</span>+ry1+
+      <span style="color: #aa5500">&quot;\&quot; class=\&quot;circle\&quot;/&gt;&quot;</span>;
+  }
+  <span style="color: #0000aa">function</span> junctionToSVG(input,ref){
+      <span style="color: #0000aa">let</span> x1=ref[<span style="color: #009999">0</span>]+extractNum(input,<span style="color: #009999">0</span>);
+      <span style="color: #0000aa">let</span> y1=ref[<span style="color: #009999">1</span>]+extractNum(input,<span style="color: #009999">1</span>);
+      determineSBCoordinates([x1],[y1]);
+      <span style="color: #0000aa">return</span> <span style="color: #aa5500">&quot;&lt;circle cy=\&quot;&quot;</span>+y1+
+      <span style="color: #aa5500">&quot;\&quot; cx=\&quot;&quot;</span>+x1+<span style="color: #aa5500">&quot;\&quot; r=\&quot;2\&quot; class=\&quot;junction\&quot;/&gt;&quot;</span>;
+  }
+  <span style="color: #0000aa">function</span> arcToSVG(input,ref){
+      <span style="color: #aaaaaa; font-style: italic">//x1,y1,x2,y2,rx1,ry1,rx2,ry2</span>
+      <span style="color: #0000aa">let</span> coordinates=[];
+  
+      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> k=<span style="color: #009999">0</span>;k&lt;<span style="color: #009999">8</span>;k++){
+          <span style="color: #aaaaaa; font-style: italic">//extract every coordinate out of string. add X and Y ref alternatingly</span>
+          coordinates[k]=ref[k%<span style="color: #009999">2</span>]+extractNum(input,k);
+      }
+      <span style="color: #aaaaaa; font-style: italic">//x1,y1,x2,y2 get corrected. (a seperate alorithim is needed because the</span>
+      <span style="color: #aaaaaa; font-style: italic">//the way .bdf declares arcs is not that straight forward)</span>
+      <span style="color: #0000aa">let</span> correctedValues=correctArc(coordinates);
+      <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> k=<span style="color: #009999">0</span>;k&lt;<span style="color: #009999">4</span>;k++){
+          coordinates[k]=correctedValues[k];
+      }
+      <span style="color: #aaaaaa; font-style: italic">//determine biggest and smallest coordinates of all elements</span>
+      determineSBCoordinates([coordinates[<span style="color: #009999">4</span>],coordinates[<span style="color: #009999">6</span>]],[coordinates[<span style="color: #009999">5</span>],coordinates[<span style="color: #009999">7</span>]]);
+      <span style="color: #0000aa">let</span> radiusX=<span style="color: #00aaaa">Math</span>.abs(((coordinates[<span style="color: #009999">6</span>]-coordinates[<span style="color: #009999">4</span>])/<span style="color: #009999">2</span>));<span style="color: #aaaaaa; font-style: italic">//(rx2-rx1)/2</span>
+      <span style="color: #0000aa">let</span> radiusY=<span style="color: #00aaaa">Math</span>.abs(((coordinates[<span style="color: #009999">7</span>]-coordinates[<span style="color: #009999">5</span>])/<span style="color: #009999">2</span>)); <span style="color: #aaaaaa; font-style: italic">//(ry2-ry1)/2</span>
+  
+      <span style="color: #0000aa">return</span><span style="color: #aa5500">&quot;&lt;path d=\&quot;M &quot;</span>+
+      coordinates[<span style="color: #009999">0</span>]+<span style="color: #aa5500">&quot; &quot;</span>+ <span style="color: #aaaaaa; font-style: italic">//x1 ...x and y coordinate of the point where the arc starts</span>
+      coordinates[<span style="color: #009999">1</span>]+     <span style="color: #aaaaaa; font-style: italic">//y1</span>
+      <span style="color: #aa5500">&quot; A &quot;</span>+radiusX+<span style="color: #aa5500">&quot; &quot;</span>+radiusY+
+      <span style="color: #aa5500">&quot; 0 0 0 &quot;</span>+<span style="color: #aaaaaa; font-style: italic">//x rotation, the long/short way, (anti)-clockwise configuration ints</span>
+      coordinates[<span style="color: #009999">2</span>]+<span style="color: #aa5500">&quot; &quot;</span>+coordinates[<span style="color: #009999">3</span>]+<span style="color: #aaaaaa; font-style: italic">//x and y coordinate of the point where the arc ends</span>
+      <span style="color: #aa5500">&quot;\&quot; class=\&quot;arc\&quot;/&gt;&quot;</span>;
+  }
+  <span style="color: #0000aa">function</span> rectangleToSVG(input,ref,type=<span style="color: #aa5500">&quot;rectangle&quot;</span>){
+      <span style="color: #0000aa">let</span> x1,y1,x2,y2;
+      <span style="color: #0000aa">if</span>(type!=<span style="color: #aa5500">&quot;refRect&quot;</span>){ 
+      <span style="color: #aaaaaa; font-style: italic">//here only the x and y ref is needed, normal rectangle, input nr will be extracted</span>
+          x1=ref[<span style="color: #009999">0</span>]+extractNum(input,<span style="color: #009999">0</span>);
+          y1=ref[<span style="color: #009999">1</span>]+extractNum(input,<span style="color: #009999">1</span>);
+          x2=ref[<span style="color: #009999">0</span>]+extractNum(input,<span style="color: #009999">2</span>);
+          y2=ref[<span style="color: #009999">1</span>]+extractNum(input,<span style="color: #009999">3</span>);
+      }
+      <span style="color: #0000aa">else</span>{
+      <span style="color: #aaaaaa; font-style: italic">//refRect, here all of the ref coordinates are being used. no extraction of the input string happens</span>
+          x1=ref[<span style="color: #009999">0</span>];
+          y1=ref[<span style="color: #009999">1</span>];
+          x2=ref[<span style="color: #009999">2</span>];
+          y2=ref[<span style="color: #009999">3</span>];
+      }
+      determineSBCoordinates([x1,x2],[y1,y2]);
+      <span style="color: #0000aa">return</span> <span style="color: #aa5500">&quot;&lt;rect x=\&quot;&quot;</span>+x1+
+      <span style="color: #aa5500">&quot;\&quot; y=\&quot;&quot;</span>+y1+
+      <span style="color: #aa5500">&quot;\&quot; width=\&quot;&quot;</span>+(x2-x1)+
+      <span style="color: #aa5500">&quot;\&quot; height=\&quot;&quot;</span>+(y2-y1)+
+       <span style="color: #aa5500">&quot;\&quot; class=\&quot;&quot;</span>+type+<span style="color: #aa5500">&quot;\&quot;/&gt;&quot;</span>; <span style="color: #aaaaaa; font-style: italic">//here refRect or rectangle</span>
+  }
+  <span style="color: #0000aa">function</span> correctArc(coordinates){
+      <span style="color: #0000aa">let</span> output=[];
+      <span style="color: #0000aa">let</span> diameter=coordinates[<span style="color: #009999">6</span>]-coordinates[<span style="color: #009999">4</span>];
+  
+      <span style="color: #0000aa">if</span>(diameter===coordinates[<span style="color: #009999">7</span>]-coordinates[<span style="color: #009999">5</span>]){ <span style="color: #aaaaaa; font-style: italic">//If the x diameter == the y diameter</span>
+          <span style="color: #0000aa">let</span> centerX=coordinates[<span style="color: #009999">4</span>]+diameter/<span style="color: #009999">2</span>;
+          <span style="color: #0000aa">let</span> centerY=coordinates[<span style="color: #009999">5</span>]+diameter/<span style="color: #009999">2</span>;
+          
+          <span style="color: #aaaaaa; font-style: italic">//want to know what happens here? To be honest I don&#39;t know ether. Thanks to the guy on stackoverflow though</span>
+          <span style="color: #aaaaaa; font-style: italic">//basically the given points aren&#39;t always on the given circle for the arc in the bdf document.</span>
+          <span style="color: #aaaaaa; font-style: italic">//this algorithm puts out the closest point for each given point on the given circle.</span>
+          <span style="color: #aaaaaa; font-style: italic">//This alorithm only works for circles, not for ellipses! With ellipses, the coordinates just get directly forwarded</span>
+          <span style="color: #aaaaaa; font-style: italic">//out of this function again, therefor that warning. Got a better idea? Contact me!</span>
+          <span style="color: #0000aa">let</span> coordinatesnew=[];
+          coordinatesnew[<span style="color: #009999">0</span>]=centerX+(diameter/<span style="color: #009999">2</span>)*((coordinates[<span style="color: #009999">0</span>]-centerX)/(<span style="color: #00aaaa">Math</span>.sqrt(<span style="color: #00aaaa">Math</span>.pow(coordinates[<span style="color: #009999">0</span>]-centerX,<span style="color: #009999">2</span>)+<span style="color: #00aaaa">Math</span>.pow(coordinates[<span style="color: #009999">1</span>]-centerY,<span style="color: #009999">2</span>))));
+          coordinatesnew[<span style="color: #009999">1</span>]=centerY+(diameter/<span style="color: #009999">2</span>)*((coordinates[<span style="color: #009999">1</span>]-centerY)/(<span style="color: #00aaaa">Math</span>.sqrt(<span style="color: #00aaaa">Math</span>.pow(coordinates[<span style="color: #009999">0</span>]-centerX,<span style="color: #009999">2</span>)+<span style="color: #00aaaa">Math</span>.pow(coordinates[<span style="color: #009999">1</span>]-centerY,<span style="color: #009999">2</span>))));
+          coordinatesnew[<span style="color: #009999">2</span>]=centerX+(diameter/<span style="color: #009999">2</span>)*((coordinates[<span style="color: #009999">2</span>]-centerX)/(<span style="color: #00aaaa">Math</span>.sqrt(<span style="color: #00aaaa">Math</span>.pow(coordinates[<span style="color: #009999">2</span>]-centerX,<span style="color: #009999">2</span>)+<span style="color: #00aaaa">Math</span>.pow(coordinates[<span style="color: #009999">3</span>]-centerY,<span style="color: #009999">2</span>))));
+          coordinatesnew[<span style="color: #009999">3</span>]=centerY+(diameter/<span style="color: #009999">2</span>)*((coordinates[<span style="color: #009999">3</span>]-centerY)/(<span style="color: #00aaaa">Math</span>.sqrt(<span style="color: #00aaaa">Math</span>.pow(coordinates[<span style="color: #009999">2</span>]-centerX,<span style="color: #009999">2</span>)+<span style="color: #00aaaa">Math</span>.pow(coordinates[<span style="color: #009999">3</span>]-centerY,<span style="color: #009999">2</span>))));
+  
+          <span style="color: #0000aa">for</span>(<span style="color: #0000aa">let</span> k=<span style="color: #009999">0</span>;k&lt;<span style="color: #009999">4</span>;k++){
+              coordinatesnew[k]=<span style="color: #00aaaa">Math</span>.abs(coordinatesnew[k]);<span style="color: #aaaaaa; font-style: italic">//abs x1,y1,x2,y2 </span>
+              output.push(<span style="color: #00aaaa">Math</span>.round(coordinatesnew[k]));
+          }
+      }
+      <span style="color: #0000aa">else</span>{
+          innerConsole(<span style="color: #aa5500">&quot;Element with non-circular arc found. Rendering might be off.&quot;</span>);
+          output=coordinates;
+      }
+      <span style="color: #0000aa">return</span> output;
+  }
+  </pre></td></tr></table></div>
+</body>
