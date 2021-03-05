@@ -10,5 +10,5 @@ Just opening index.html sadly won't do the trick. Because of CORS, your initial 
 
 
 # Changelog
-Fixed CORS Problem where website would freeze on some browsers (changed absolute to relative reference; XMLHttpRequest)
-Changed href from source-buttons from sourceCode.html to this Github page
+-> Fixed CORS Problem where website would freeze on some browsers (changed absolute to relative reference; XMLHttpRequest)
+-> Changed href from source-buttons from sourceCode.html to this Github page
